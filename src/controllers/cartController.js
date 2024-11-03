@@ -1,19 +1,15 @@
 const Cart = require('../models/Cart');
 
-const getCart = async (req, res) => {
-  // Lógica para obtener carrito por ID con populate
+exports.getCarts = async (req, res) => {
+    // Código para obtener carritos
 };
 
-const addProductToCart = async (req, res) => {
-  // Lógica para agregar producto al carrito
+exports.createCart = async (req, res) => {
+    // Código para crear un carrito
 };
 
-const updateCart = async (req, res) => {
-  // Lógica para actualizar carrito
+exports.addProductToCart = async (req, res) => {
+    // Código para agregar un producto al carrito
 };
 
-const deleteProductFromCart = async (req, res) => {
-  // Lógica para eliminar producto del carrito
-};
-
-module.exports = { getCart, addProductToCart, updateCart, deleteProductFromCart };
+// Otros métodos necesarios

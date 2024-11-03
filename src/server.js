@@ -12,10 +12,12 @@ const app = express();
 const httpServer = app.listen(8080, () => console.log('Server running on port 8080'));
 const io = new Server(httpServer);
 
-// Configurar conexión a MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/ecommerce')
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((error) => console.error("MongoDB connection error:", error));
+// Conexión a MongoDB
+mongoose.connect('mongodb://127.0.0.1:27017/ecommerce', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 // Configurar Handlebars
 app.engine('handlebars', handlebars.engine());
@@ -31,9 +33,3 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/products', productRoutes);
 app.use('/api/carts', cartRoutes);
 app.use('/', viewsRouter);
-
-// Manejo de errores
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something went wrong!');
-});

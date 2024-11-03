@@ -1,17 +1,23 @@
-body {
-    font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    color: #333;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  li {
-    margin: 10px 0;
-  }
-  
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.product-card h2 {
+  font-size: 1.2em;
+  color: #333;
+}
