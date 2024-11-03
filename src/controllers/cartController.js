@@ -1,15 +1,39 @@
 const Cart = require('../models/Cart');
 
-exports.getCarts = async (req, res) => {
-    // Código para obtener carritos
-};
-
+// Crear un nuevo carrito
 exports.createCart = async (req, res) => {
-    // Código para crear un carrito
+    try {
+        const cart = new Cart();
+        await cart.save();
+        res.status(201).json(cart);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
+// Obtener un carrito por ID
+exports.getCartById = async (req, res) => {
+    try {
+        const cart = await Cart.findById(req.params.id);
+        if (!cart) return res.status(404).json({ message: 'Carrito no encontrado' });
+        res.json(cart);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// Agregar un producto al carrito
 exports.addProductToCart = async (req, res) => {
-    // Código para agregar un producto al carrito
-};
+    try {
+        const cart = await Cart.findById(req.params.id);
+        if (!cart) return res.status(404).json({ message: 'Carrito no encontrado' });
 
-// Otros métodos necesarios
+        const { productId, quantity } = req.body;
+        cart.products.push({ productId, quantity });
+        await cart.save();
+
+        res.status(200).json(cart);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
